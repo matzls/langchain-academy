@@ -15,7 +15,7 @@ joke_prompt = """Generate a joke about {subject}"""
 best_joke_prompt = """Below are a bunch of jokes about {topic}. Select the best one! Return the ID of the best one, starting 0 as the ID for the first joke. Jokes: \n\n  {jokes}"""
 
 # LLM
-model = ChatOpenAI(model="gpt-4o", temperature=0) 
+model = ChatOpenAI(model="gpt-4", temperature=0) 
 
 # Define the state
 class Subjects(BaseModel):
@@ -67,3 +67,17 @@ graph_builder.add_edge("best_joke", END)
 
 # Compile the graph
 graph = graph_builder.compile()
+
+# Add this at the end of your file
+if __name__ == "__main__":
+    # Initialize the graph with a topic
+    result = graph.invoke({
+        "topic": "artificial intelligence",
+        "subjects": [],
+        "jokes": [],
+        "best_selected_joke": ""
+    })
+    
+    print("Final result:", result)
+
+
